@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+h1 {
+  margin-bottom: 3rem;
+}
+
+.email {
+  margin-bottom: 3rem;
+}

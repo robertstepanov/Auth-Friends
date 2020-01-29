@@ -11,28 +11,37 @@ class FriendsList extends React.Component {
     this.getFriends();
   }
 
-  getFriends = () => {
+  getFriends() {
     axiosWithAuth()
       .get("/api/friends")
       .then(res => {
         console.log(res.data);
         this.setState({
-          friends: [res.data]
+          friends: res.data
         });
       })
       .catch(err => console.log(err));
-  };
+  }
 
   render() {
-    const { friends } = this.state;
-
+    // const { friends } = this.state;
+    // console.log(friends);
     return (
       <div>
         <h1>Friends List</h1>
         <div>
-          {friends.map(friend => (
+          {/* {this.state.friends.map(friend => (
             <h3>{this.state.friend}</h3>
-          ))}
+          ))} */}
+          {this.state.friends.map(friend => {
+            return (
+              <div>
+                <h2>{friend.name}</h2>
+                <h3>{friend.age}</h3>
+                <h3 className="email">{friend.email}</h3>
+              </div>
+            );
+          })}
         </div>
       </div>
     );
