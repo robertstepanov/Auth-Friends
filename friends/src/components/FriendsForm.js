@@ -2,30 +2,22 @@ import React from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 class FriendsForm extends React.Component {
-  // state = {
-  //   newFriend: {}
-  // };
+  state = {
+    newFriend: {
+      id: Date.now(),
+      name: "",
+      age: "",
+      email: ""
+    }
+  };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      newFriend: {
-        name: "",
-        age: "",
-        email: ""
-      }
-    };
-  }
-  postFriend = props => {
+  postFriend = e => {
+    e.preventDefault();
     axiosWithAuth()
       .post("/api/friends")
       .then(res => {
-        console.log(props.newFriend.name);
-        this.setState({
-          newFriend: res.data
-        });
-      })
-      .catch(err => console.log(err));
+        console.log(res.data);
+      });
   };
 
   handleChanges = e => {
@@ -37,25 +29,10 @@ class FriendsForm extends React.Component {
     });
   };
 
-  // postFriend = e => {
-  //   e.preventDefault();
-  //   this.props.postFriend(this.state.newFriend)
-  // }
-
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  //     if (this.state.newFriend !== "") {
-  //       this.state.newFriend(this.state.newFriend);
-  //       this.setState({
-  //         newFriend: ""
-  //       })
-  //     }
-  // }
-
   render() {
     return (
       <div>
-        <form method="POST">
+        <form onSubmit={this.postFriend}>
           <div>
             <input
               placeholder="Name"
@@ -79,7 +56,7 @@ class FriendsForm extends React.Component {
               onChange={this.handleChanges}
             />
           </div>
-          <button>Add Friend</button>
+          <button type="submit">Add Friend</button>
         </form>
       </div>
     );

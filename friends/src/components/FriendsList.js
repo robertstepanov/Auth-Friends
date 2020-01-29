@@ -28,7 +28,7 @@ class FriendsList extends React.Component {
     // console.log(friends);
     return (
       <div>
-         <FriendsForm />
+        <FriendsForm />
         <h1>Friends List</h1>
         <div>
           {/* {this.state.friends.map(friend => (
